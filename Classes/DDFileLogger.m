@@ -881,7 +881,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             BOOL shouldArchiveMostRecent = NO;
 
             if (mostRecentLogFileInfo.isArchived) {
-                shouldArchiveMostRecent = NO;
+                // if the most recent file has already been marked as 'archived', we should not attempt to append to it.
+                shouldArchiveMostRecent = YES;
 			} else if ([self shouldArchiveRecentLogFileInfo:mostRecentLogFileInfo]) {
 				shouldArchiveMostRecent = YES;
 			} else if (_maximumFileSize > 0 && mostRecentLogFileInfo.fileSize >= _maximumFileSize) {
