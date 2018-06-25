@@ -54,7 +54,10 @@ static DDASLLogger *sharedInstance;
         // A default asl client is provided for the main thread,
         // but background threads need to create their own client.
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         _client = asl_open(NULL, "com.apple.console", 0);
+#pragma GCC diagnostic pop
     }
 
     return self;
@@ -100,6 +103,8 @@ static DDASLLogger *sharedInstance;
         NSAssert(aslLogLevel < (sizeof(level_strings) / sizeof(level_strings[0])),
                  @"Unhandled ASL log level.");
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         aslmsg m = asl_new(ASL_TYPE_MSG);
         if (m != NULL) {
             if (asl_set(m, ASL_KEY_LEVEL, level_strings[aslLogLevel]) == 0 &&
@@ -110,6 +115,7 @@ static DDASLLogger *sharedInstance;
             }
             asl_free(m);
         }
+#pragma GCC diagnostic pop
         //TODO handle asl_* failures non-silently?
     }
 }
