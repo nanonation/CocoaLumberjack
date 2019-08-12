@@ -971,6 +971,10 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             #endif
 
             dispatch_resume(_currentLogFileVnode);
+        } else {
+            if ([logFileManager respondsToSelector:@selector(didFailToCreateLogFileHandle:)]) {
+                [logFileManager didFailToCreateLogFileHandle:(_currentLogFileInfo.filePath)];
+            }
         }
     }
 
@@ -1006,6 +1010,7 @@ static int exception_count = 0;
 
             [self didLogMessage];
         } @catch (NSException *exception) {
+            
             exception_count++;
 
             if (exception_count <= 10) {
@@ -1014,6 +1019,10 @@ static int exception_count = 0;
                 if (exception_count == 10) {
                     NSLogError(@"DDFileLogger.logMessage: Too many exceptions -- will not log any more of them.");
                 }
+            }
+            
+            if ([logFileManager respondsToSelector:@selector(didFailToWriteToLogFileHandle:)]) {
+                [logFileManager didFailToWriteToLogFileHandle:(_currentLogFileInfo.filePath)];
             }
         }
     }

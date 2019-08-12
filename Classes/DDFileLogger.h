@@ -160,6 +160,16 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  */
 - (void)didRollAndArchiveLogFile:(NSString *)logFilePath NS_SWIFT_NAME(didRollAndArchiveLogFile(atPath:));
 
+/**
+ *  Called when a log file handle could ot be created
+ */
+- (void)didFailToCreateLogFileHandle:(NSString *)logFilePath NS_SWIFT_NAME(didFailToCreateLogFileHandle(atPath:));
+
+/**
+ *  Called when a message could not be written to a file
+ */
+- (void)didFailToWriteToLogFileHandle:(NSString *)logFilePath NS_SWIFT_NAME(didFailToWriteToLogFileHandle(atPath:));
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
