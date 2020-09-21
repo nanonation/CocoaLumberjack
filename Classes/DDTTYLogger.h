@@ -18,7 +18,11 @@
     #define DD_LEGACY_MACROS 0
 #endif
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wquoted-include-in-framework-header"
 #import "DDLog.h"
+#pragma clang diagnostic pop
+
 
 #define LOG_CONTEXT_ALL INT_MAX
 

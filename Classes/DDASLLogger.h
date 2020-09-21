@@ -20,7 +20,10 @@
     #define DD_LEGACY_MACROS 0
 #endif
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wquoted-include-in-framework-header"
 #import "DDLog.h"
+#pragma clang diagnostic pop
 
 // Custom key set on messages sent to ASL
 extern const char* const kDDASLKeyDDLog;

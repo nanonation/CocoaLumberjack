@@ -20,7 +20,10 @@
     #define DD_LEGACY_MACROS 1
 #endif
 // DD_LEGACY_MACROS is checked in the file itself
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wquoted-include-in-framework-header"
 #import "DDLegacyMacros.h"
+#pragma clang diagnostic pop
 
 #if OS_OBJECT_USE_OBJC
     #define DISPATCH_QUEUE_REFERENCE_TYPE strong
